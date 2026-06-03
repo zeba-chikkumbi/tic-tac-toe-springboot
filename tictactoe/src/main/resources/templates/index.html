@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<h1>Tic Tac Toe</h1>
+
+<h2 th:text="${message}"></h2>
+
+<div class="board">
+
+    <div th:each="row,rowStat : ${board}">
+
+        <div th:each="cell,colStat : ${row}">
+
+            <form th:action="@{/move}" method="post">
+                <input type="hidden" name="row" th:value="${rowStat.index}">
+                <input type="hidden" name="col" th:value="${colStat.index}">
+                <button type="submit" class="cell"
+                    th:text="${cell == null ? '' : cell}">
+                </button>
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+<script th:if="${message != null and #strings.contains(message, 'Congratulations')}">
+    confetti({
+        particleCount: 200,
+        spread: 120,
+        origin: { y: 0.6 }
+    });
+</script>
+
+</body>
+</html>
