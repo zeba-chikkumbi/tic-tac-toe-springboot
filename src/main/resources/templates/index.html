@@ -30,15 +30,24 @@
 
 </div>
 
+<div class="scoreboard">
+    <h3>🏆 Player: <span th:text="${playerWins}"></span>
+    🤖 System: <span th:text="${systemWins}"></span>
+    🤝 Draws: <span th:text="${draws}"></span></h3>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
-<script th:if="${message != null and #strings.contains(message, 'Congratulations')}">
+<script th:if="${message != null and #strings.contains(message, 'You Win')}">
     confetti({
         particleCount: 200,
         spread: 120,
         origin: { y: 0.6 }
     });
 </script>
-
+<footer style="margin-bottom:30px; text-align:center;">
+    <hr>
+    <p>© 2026 Zeba Chikkumbi. All Rights Reserved.</p>
+</footer>
 </body>
 </html>
