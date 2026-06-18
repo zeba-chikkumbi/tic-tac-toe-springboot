@@ -1,6 +1,12 @@
 body {
     text-align: center;
-    font-family: Arial;
+    font-family: 16px;
+}
+
+@media (min-width: 768px){
+    body{
+        font-size:18px;
+    }
 }
 
 .board {

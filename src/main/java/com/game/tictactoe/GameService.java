@@ -9,11 +9,18 @@ public class GameService {
 
     private final String[][] board = new String[3][3];
 
+    private int score = 0;
+    
     private String message = "Your Turn (X)";
 
     private int playerWins = 0;
     private int systemWins = 0;
     private int draws = 0;
+    private boolean gameOver = false;
+
+    public boolean isGameOver() {
+        return gameOver;
+    }
 
     public String[][] getBoard() {
         return board;
@@ -198,18 +205,13 @@ public class GameService {
 
     public void resetBoard() {
 
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                board[i][j] = null;
-            }
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            board[i][j] = null;
         }
     }
 
-    public void resetScores() {
-        playerWins = 0;
-        systemWins = 0;
-        draws = 0;
-        message = "Your Turn (X)";
-        resetBoard();
-    }
+    message = "Your Turn (X)";
+}
+
 }

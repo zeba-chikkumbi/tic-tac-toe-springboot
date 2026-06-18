@@ -3,6 +3,7 @@
 <head>
     <title>Tic Tac Toe</title>
     <link rel="stylesheet" th:href="@{/style.css}">
+    <meta name="viewport" content="width=device-width, initial-scale1.0"/>
 </head>
 <body>
 
@@ -31,7 +32,7 @@
 </div>
 
 <div class="scoreboard">
-    <h3>🏆 Player: <span th:text="${playerWins}"></span>
+    <h3>🏆 You: <span th:text="${playerWins}"></span>
     🤖 System: <span th:text="${systemWins}"></span>
     🤝 Draws: <span th:text="${draws}"></span></h3>
 </div>
@@ -45,9 +46,31 @@
         origin: { y: 0.6 }
     });
 </script>
+<script th:if="${message != null and #strings.contains(message,'Win')}">
+    setTimeout(function() {
+
+        if(confirm("Game Over! Start a new game?")) {
+            window.location.href = "/";
+        }
+
+    }, 500);
+</script>
+<div th:if="${message != null and (#strings.contains(message,'Win') or #strings.contains(message,'Draw'))}">
+    <form th:action="@{/new-game}" method="post">
+        <button type="submit">🎮 Play Again</button>
+    </form>
+</div>
+
 <footer style="margin-bottom:30px; text-align:center;">
     <hr>
-    <p>© 2026 Zeba Chikkumbi. All Rights Reserved.</p>
+    <p>Designed and developed by <b>ZEBA TAHSEEN </b> using Java and SpringBoot.</p>
 </footer>
+
+<script>
+window.addEventListener("beforeunload", function () {
+    navigator.sendBeacon('/reset-board');
+});
+</script>
+
 </body>
 </html>
